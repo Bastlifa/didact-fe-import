@@ -1,41 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Form, Field, Formik } from "formik";
 import * as Yup from 'yup';
-import { loginAction, verifyToken } from '../../store/actions';
+import { loginAction } from '../../store/actions';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { Wrapper, LoginWrapper, LoginFormWrapper, Header } from './LoginStyles'
-
 import LoginImage from '../../images/computer.png'
-
 import beURL from '../../utils/beURL'
-
 const LoginSchema = Yup.object().shape({
     email: Yup.string().required("Email is required").email(),
     password: Yup.string().required("Password is required")
 });
-
-
 const LoginForm = (props) => {
-
     const state = useSelector(state => state.onboardingReducer)
     const dispatch = useDispatch()
     const loginError = state.loginError
-
     const handleLogin = (values) => {
         dispatch(loginAction(props.history, values))
     }
-
     return (
         <Wrapper>
             <Header>
                 <h1 style={{fontFamily: 'ITC Grouch'}}>Didact</h1>
                 <div>
-                    <a>About</a>
-                    <a>Contact</a>
+                    {/* <a>About</a>
+                    <a>Contact</a> */}
                 </div>
             </Header>
-            <img src={LoginImage}/>
+            <img src={LoginImage} alt='computer on a desk'/>
             <LoginWrapper>
                 <LoginFormWrapper>
                     <div className="header">
@@ -88,5 +79,4 @@ const LoginForm = (props) => {
         </Wrapper>
     )
 }
-
 export default LoginForm;
